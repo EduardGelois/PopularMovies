@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PopularMovies</string>
+    <string name="popular_movies">Popular movies</string>
+    <string name="vote_count">Vote count</string>
+    <string name="release_date">Release date</string>
+    <string name="connect_error">Failed to connect to server</string>
+    <string name="original_title">Original title</string>
+</resources>
