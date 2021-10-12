@@ -1,6 +1,5 @@
 package com.gelioscompany.popularmovies.presentation.view.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,13 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gelioscompany.popularmovies.R
 import com.gelioscompany.popularmovies.databinding.ItemErrorBinding
 
-class MoviesLoadStateAdapter(
-    private val context: Context,
-) : LoadStateAdapter<MoviesLoadStateAdapter.MoviesLoadStateViewHolder>() {
+class MoviesLoadStateAdapter :
+    LoadStateAdapter<MoviesLoadStateAdapter.MoviesLoadStateViewHolder>() {
 
     class MoviesLoadStateViewHolder(val binding: ItemErrorBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-    }
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onBindViewHolder(holder: MoviesLoadStateViewHolder, loadState: LoadState) {
         val binding = holder.binding
@@ -29,7 +26,7 @@ class MoviesLoadStateAdapter(
             is LoadState.Error -> {
                 binding.progressBar.visibility = View.GONE
                 binding.errorText.visibility = View.VISIBLE
-                binding.errorText.text = context.resources.getString(R.string.connect_error)
+                binding.errorText.text = holder.itemView.context.getString(R.string.connect_error)
             }
             is LoadState.NotLoading -> {
                 binding.progressBar.visibility = View.GONE

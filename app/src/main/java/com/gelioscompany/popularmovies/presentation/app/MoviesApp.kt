@@ -18,7 +18,7 @@ class MoviesApp : Application() {
         // init dagger component
         appComponent = DaggerAppComponent.create()
         // handle rx errors
-        RxJavaPlugins.setErrorHandler { /* no-op */}
+        RxJavaPlugins.setErrorHandler { /* no-op */ }
 
         initTimber()
     }
@@ -32,9 +32,7 @@ class MoviesApp : Application() {
     }
 
     private fun initTimber() {
-          if (BuildConfig.DEBUG)
-        Timber.plant(Timber.DebugTree())
-//  todo      else
-//            Timber.plant(FabricTree())
+        if (BuildConfig.DEBUG)
+            Timber.plant(Timber.DebugTree())
     }
 }

@@ -1,9 +1,7 @@
 package com.gelioscompany.popularmovies.presentation.view.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -14,13 +12,16 @@ import com.gelioscompany.popularmovies.databinding.ItemMovieBinding
 import com.gelioscompany.popularmovies.domain.models.MoviesModel
 
 class MoviesListAdapter(
-    diffCallback: DiffUtil.ItemCallback<MoviesModel>,
-    private val itemClickListener: OnItemClickListener? = null
+    diffCallback: DiffUtil.ItemCallback<MoviesModel>
 ) : PagingDataAdapter<MoviesModel, MoviesListAdapter.MoviesViewHolder>(diffCallback) {
 
-    class MoviesViewHolder(val binding: ItemMovieBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    private var onItemClickListener: ((MoviesModel) -> Unit)? = null
+    fun setOnItemClickListener(listener: (MoviesModel) -> Unit) {
+        onItemClickListener = listener
     }
+
+    class MoviesViewHolder(val binding: ItemMovieBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -32,8 +33,7 @@ class MoviesListAdapter(
     }
 
     override fun onBindViewHolder(
-        holder: MoviesViewHolder,
-        position: Int
+        holder: MoviesViewHolder, position: Int
     ) {
         val item: MoviesModel? = getItem(position)
         item?.let { movie ->
@@ -48,32 +48,8 @@ class MoviesListAdapter(
             binding.ratingBar.rating = movie.voteAverage.toFloat()
 
             binding.container.setOnClickListener {
-                binding.motion.tag = "click"
-                binding.motion.transitionToEnd()
+                onItemClickListener?.invoke(movie)
             }
-
-            binding.motion.setTransitionListener(object : MotionLayout.TransitionListener {
-                override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
-                    if (binding.motion.tag == null)
-                        binding.animView.visibility = View.GONE
-                }
-
-                override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
-                }
-
-                override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
-                    if (binding.motion.tag != null) {
-                        itemClickListener?.onClickItem(movie)
-                        binding.motion.tag = null
-                        binding.motion.transitionToStart()
-                    }
-                }
-
-                override fun onTransitionTrigger(
-                    p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float
-                ) {
-                }
-            })
         }
     }
 }

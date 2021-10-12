@@ -1,8 +1,10 @@
 package com.gelioscompany.popularmovies.presentation.view.base
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -26,14 +28,7 @@ open class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
         exceptionObserve()
     }
 
-    open fun onBackPressed(): Boolean {
-        return false
+    fun getMyDrawable(id: Int): Drawable? {
+       return ContextCompat.getDrawable(requireContext(), id)
     }
-
-
-    open fun navController(navHostFragment: Int = R.id.navHostFragment): NavController =
-        Navigation.findNavController(
-            requireActivity(),
-            navHostFragment
-        )
 }

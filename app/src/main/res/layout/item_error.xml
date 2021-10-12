@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:padding="10dp">
 
-
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="match_parent"

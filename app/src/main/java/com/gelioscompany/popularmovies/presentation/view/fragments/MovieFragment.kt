@@ -1,8 +1,6 @@
 package com.gelioscompany.popularmovies.presentation.view.fragments
 
-import android.annotation.SuppressLint
 import android.view.View
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.gelioscompany.popularmovies.R
@@ -10,22 +8,15 @@ import com.gelioscompany.popularmovies.data.network.util.Constants
 import com.gelioscompany.popularmovies.databinding.FragmentMovieBinding
 import com.gelioscompany.popularmovies.databinding.ViewToolbarBinding
 import com.gelioscompany.popularmovies.domain.models.MoviesModel
-import com.gelioscompany.popularmovies.presentation.app.MoviesApp.Companion.appComponent
 import com.gelioscompany.popularmovies.presentation.utils.viewBinding
 import com.gelioscompany.popularmovies.presentation.view.base.BaseFragment
-import com.gelioscompany.popularmovies.presentation.viewmodel.MainViewModel
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 class MovieFragment : BaseFragment(R.layout.fragment_movie) {
 
     private val viewBinding by viewBinding(FragmentMovieBinding::bind)
     private lateinit var toolbarBinding: ViewToolbarBinding
-
-    private val viewModel: MainViewModel by viewModels {
-        requireContext().appComponent.factory
-    }
 
     private val args: MovieFragmentArgs by navArgs()
 
@@ -68,9 +59,8 @@ class MovieFragment : BaseFragment(R.layout.fragment_movie) {
 
     }
 
-    @SuppressLint("SimpleDateFormat")
     private fun convertTime(time: String): String {
-        val fmt = SimpleDateFormat("yyyy-MM-dd")
+        val fmt = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val date: Date = fmt.parse(time)
 
         val fmtOut = SimpleDateFormat("dd.MM.yyyy")

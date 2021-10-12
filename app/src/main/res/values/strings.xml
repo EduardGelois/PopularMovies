@@ -5,4 +5,5 @@
     <string name="release_date">Release date</string>
     <string name="connect_error">Failed to connect to server</string>
     <string name="original_title">Original title</string>
+    <string name="message_dialog_connect_error">Please check your internet connection</string>
 </resources>
