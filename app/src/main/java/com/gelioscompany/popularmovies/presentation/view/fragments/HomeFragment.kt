@@ -87,7 +87,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         builder.setCancelable(true)
 
         builder.setPositiveButton(
-            "OK"
+            getString(R.string.ok)
         ) { dialog, id -> dialog.cancel() }
         builder.setIcon(getMyDrawable(R.drawable.ic_smile))
 
